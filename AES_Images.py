@@ -58,7 +58,7 @@ def ImageCBCEncrypt():
     key = (b'706D6F6E696275797663747278657A77')
     print(key)
     cipher_CBC=AES.new(key, AES.MODE_CBC, b'696E697476637472')
-    Image.frombytes(im_enc.mode, im_enc.size, cipher_CBC.encrypt(bytesIm)).save('CBC_encrypted.png')
+    Image.frombytes(im_enc.mode, im_enc.size, cipher_CBC.encrypt(pad(bytesIm,16))).save('CBC_encrypted.png')
 
 #ImageCBCEncrypt()
 
@@ -73,7 +73,7 @@ def ImageCBCDecrypt():
     print(im_dec.size)
     print(im_dec.mode)
     bytesEnc = im_dec.tobytes()
-    Image.frombytes(im_dec.mode, im_dec.size, cipher_CBC.decrypt(bytesEnc)).save('CBC_decrypt_test.png')
+    Image.frombytes(im_dec.mode, im_dec.size, cipher_CBC.decrypt(pad(bytesEnc,16))).save('CBC_decrypt_test.png')
 
 #ImageCBCDecrypt()
 
